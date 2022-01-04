@@ -19,12 +19,19 @@
 
 // TODO: Include packages needed for this application
 const generateMarkdown = require('./utils/generateMarkdown.js');
-console.log("hello");
+
 // TODO: Create an array of questions for user input
+const profileDataArgs = process.argv.slice(2, process.argv.length);
+
 const questions = [];
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {}
+const printProfileData = profileDataArr => {
+    profileDataArr.forEach(profileItem => console.log(profileItem));
+    console.log("=========");
+};
+printProfileData(profileDataArgs);
 
 // TODO: Create a function to initialize app
 function init() {}
