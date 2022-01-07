@@ -22,10 +22,63 @@ const generateMarkdown = require('./utils/generateMarkdown.js');
 
 // TODO: Create an array of questions for user input
 const profileDataArgs = process.argv.slice(2, process.argv.length);
+const [name, github] = profileDataArgs;
+const questions = [
+    {
+        message: "What is the title of your project?",
+        name: "title"
+    },
+    {
+        message: "Who made this project?",
+        name: "creator"
+    },
+    {
+        message: "What is the description of the project?",
+        name: "description"
+    },
+    {
+        message: "What is the point of this project?",
+        name: "useForProject"
+    },
+    {
+        message: "How did you make this project?",
+        name: "creationOfProject"
+    },
+    {
+        message: "How do I install this project?",
+        name: "installation"
+    },
+    {
+        message: "What licenses do I need to use this project?",
+        name: "licenses"
+    },
+    {
+        message: "Did anyone contribute to this project?",
+        name: "constributors"
+    },
+    {
+        message: "What challenges did you face?",
+        name: "challenges"
+    },
+    {
+        message: "What makes this project unique?",
+        name: "special"
+    },
+];
 
-const questions = [];
 
 // TODO: Create a function to write README file
+const generateREADME = (username, githubName) => {
+    return `
+    Name: ${username}
+    Github: ${githubName}
+    `;
+};
+console.log(name, github);
+console.log(generateREADME(name, github));
+
+
+
 function writeToFile(fileName, data) {}
 const printProfileData = profileDataArr => {
     profileDataArr.forEach(profileItem => console.log(profileItem));
