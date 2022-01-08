@@ -75,7 +75,7 @@ const questions = [
 
 
 // TODO: Create a function to write README file
-const promptUserForReadMeInfo = (title, description, tOC, installation, useOfProject, licenses, contributors, testing, githubRepo) => {
+const promptUserForReadMeInfo = () => {
     return inquirer.prompt([
         {
             type: 'input',
@@ -196,6 +196,7 @@ const promptUserForReadMeInfo = (title, description, tOC, installation, useOfPro
             }
         },
     ])
+    .then(writeToFile(generateMarkdown)) //trying to take the responses and put them in a readme but this looks suspicious
 }
 
 const printProfileData = profileDataArr => {
