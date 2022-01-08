@@ -149,18 +149,10 @@ const promptUserForReadMeInfo = () => {
             }
         },
         {
-            type: 'input',
+            type: 'checkbox',
             name: 'licenses',
-            message: 'What licenses are needed to use this project? (Required)',
-            validate: licensesInput => {
-                if (licensesInput) {
-                    licenses = licensesInput
-                    return true;
-                } else {
-                    console.log('Please enter any licenses. If none are needed, please say so!');
-                    return false;
-                }
-            }
+            message: 'What licenses are needed to use this project? Check all that apply (Required)',
+            choices: ['None', 'MIT', 'Apache','Perl', 'Boost', 'ISC', 'BSD', 'Mozilla', 'Creative Commons', 'IBM', 'Eclipse', 'GNU', 'Open Data Commons', 'The Organization for Ethical Source', ]
         },
         {
             type: 'input',
@@ -222,7 +214,7 @@ const printProfileData = profileDataArr => {
 ## How to Use Project 
 - ${useOfProject}
 ## Licenses Needed 
-- ${licenses}
+- ${licenses.map(license => license).join(', ')}
 ## Contributions 
 - ${contributors}
 ## Testing 
