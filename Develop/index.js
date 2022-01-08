@@ -86,7 +86,7 @@ const promptUserForReadMeInfo = () => {
             message: 'What is the title of your project? (Required)',
             validate: titleInput => {
                 if (titleInput) {
-                    titleInput = title;
+                    title = titleInput;
                     return true;
                 }else {
                     console.log('Please enter a title!');
@@ -100,6 +100,7 @@ const promptUserForReadMeInfo = () => {
             message: 'Please provide a description for your project. (Required)',
             validate: descriptionInput => {
                 if (descriptionInput) {
+                    description = descriptionInput;
                     return true;
                 } else {
                     console.log('Please enter a description!');
@@ -113,6 +114,7 @@ const promptUserForReadMeInfo = () => {
             message: 'Please list out your Table of Contents (Required)',
             validate: tOCInput => {
                 if (tOCInput) {
+                    tOC = tOCInput;
                     return true;
                 } else {
                     console.log('Please enter your table of contents chapters!');
@@ -126,6 +128,7 @@ const promptUserForReadMeInfo = () => {
             message: 'How would someone install your project? (Required)',
             validate: installationInput => {
                 if (installationInput) {
+                    installation = installationInput;
                     return true;
                 } else {
                     console.log('Please enter installation instructions!');
@@ -139,6 +142,7 @@ const promptUserForReadMeInfo = () => {
             message: 'How do you use this project? (Required)',
             validate: useOfProjectInput => {
                 if (useOfProjectInput) {
+                    useOfProject = useOfProjectInput;
                     return true;
                 } else {
                     console.log('Please enter how to use the project!');
@@ -152,6 +156,7 @@ const promptUserForReadMeInfo = () => {
             message: 'What licenses are needed to use this project? (Required)',
             validate: licensesInput => {
                 if (licensesInput) {
+                    licenses = licensesInput
                     return true;
                 } else {
                     console.log('Please enter any licenses. If none are needed, please say so!');
@@ -163,8 +168,9 @@ const promptUserForReadMeInfo = () => {
             type: 'input',
             name: 'constributors',
             message: 'Did anyone contribute to this project? (Required)',
-            validate: constributorsInput => {
-                if (constributorsInput) {
+            validate: contributorsInput => {
+                if (contributorsInput) {
+                    contributors = contributorsInput;
                     return true;
                 } else {
                     console.log('Please add any contributors, if none specify!');
@@ -178,6 +184,7 @@ const promptUserForReadMeInfo = () => {
             message: 'How do we test this project? (Required)',
             validate: testingInput => {
                 if (testingInput) {
+                    testing = testingInput;
                     return true;
                 } else {
                     console.log('Please enter how to test this project! (Required)');
@@ -191,6 +198,7 @@ const promptUserForReadMeInfo = () => {
             message: 'What is the github link? (Required)',
             validate: githubRepoInput => {
                 if (githubRepoInput) {
+                    githubRepo = githubRepoInput
                     return true;
                 } else {
                     console.log('Please enter a URL to the github repo!');
