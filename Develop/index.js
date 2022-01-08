@@ -1,5 +1,5 @@
 // DONE - GIVEN a command-line application that accepts user input
-// WHEN I am prompted for information about my application repository
+// dONE - WHEN I am prompted for information about my application repository
 // THEN a high-quality, professional README.md is generated with the title of my project and sections entitled Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions
 // WHEN I enter my project title
 // THEN this is displayed as the title of the README
@@ -20,6 +20,16 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown.js');
+
+var title;
+var description;
+var tOC;
+var installation;
+var useOfProject;
+var licenses;
+var contributors;
+var testing;
+var githubRepo;
 
 // TODO: Create an array of questions for user input
 const profileDataArgs = process.argv.slice(2, process.argv.length);
@@ -65,7 +75,7 @@ const questions = [
 
 
 // TODO: Create a function to write README file
-const promptUserForReadMeInfo = () => {
+const promptUserForReadMeInfo = (title, description, tOC, installation, useOfProject, licenses, contributors, testing, githubRepo) => {
     return inquirer.prompt([
         {
             type: 'input',
@@ -73,12 +83,13 @@ const promptUserForReadMeInfo = () => {
             message: 'What is the title of your project? (Required)',
             validate: titleInput => {
                 if (titleInput) {
+                    titleInput = title;
                     return true;
                 }else {
                     console.log('Please enter a title!');
                     return false;
                 }
-            }
+            },
         },
         {
             type: 'input',
@@ -162,8 +173,8 @@ const promptUserForReadMeInfo = () => {
             type: 'input',
             name: 'testing',
             message: 'How do we test this project? (Required)',
-            validate: titleInput => {
-                if (titleInput) {
+            validate: testingInput => {
+                if (testingInput) {
                     return true;
                 }else {
                     console.log('Please enter how to test this project! (Required)');
@@ -190,11 +201,21 @@ const promptUserForReadMeInfo = () => {
 const printProfileData = profileDataArr => {
     //profileDataArr.forEach(profileItem => console.log(profileItem));
     console.log("=========");
+    return `
+        Title of Project: ${title},
+        Project Description: ${description},
+        Table of Contents: ${tOC},
+        Installation Instructions: ${installation},
+        How to Use Project: ${useOfProject},
+        Licenses needed: ${licenses},
+        Contributors: ${contributors},
+        Testing instructions: ${testing},
+        GitHub Repo Link: ${githubRepo},
+    `
 };
 
 //this is code that came with the starter code
 function writeToFile(fileName, data) {}
-
 printProfileData(profileDataArgs);
 
 // TODO: Create a function to initialize app
