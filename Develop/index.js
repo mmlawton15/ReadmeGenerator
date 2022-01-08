@@ -1,5 +1,5 @@
 // DONE - GIVEN a command-line application that accepts user input
-// dONE - WHEN I am prompted for information about my application repository
+// DONE - WHEN I am prompted for information about my application repository
 // THEN a high-quality, professional README.md is generated with the title of my project and sections entitled Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions
 // WHEN I enter my project title
 // THEN this is displayed as the title of the README
@@ -214,16 +214,16 @@ const printProfileData = profileDataArr => {
     //profileDataArr.forEach(profileItem => console.log(profileItem));
     console.log("=========");
     return `
-        Title of Project: ${title},
-        Project Description: ${description},
-        Table of Contents: ${tOC},
-        Installation Instructions: ${installation},
-        How to Use Project: ${useOfProject},
-        Licenses needed: ${licenses},
-        Contributors: ${contributors},
-        Testing instructions: ${testing},
-        GitHub Repo Link: ${githubRepo},
-    `
+# Title: ${title}
+## Project Description: ${description}
+## Table of Contents: ${tOC}
+## Installation Instructions: ${installation}
+## How to Use Project: ${useOfProject}
+## Licenses needed: ${licenses}
+## Contributors: ${contributors}
+## Testing instructions: ${testing}
+## GitHub Repo Link: ${githubRepo}
+`
 };
 
 //this is code that came with the starter code
