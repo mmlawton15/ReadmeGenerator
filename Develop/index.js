@@ -20,6 +20,9 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown.js');
+const fs = require("fs");
+const path = require("path")
+
 
 var title;
 var description;
@@ -32,8 +35,8 @@ var testing;
 var githubRepo;
 
 // TODO: Create an array of questions for user input
-const profileDataArgs = process.argv.slice(2, process.argv.length);
-const [name, github] = profileDataArgs;
+// const profileDataArgs = process.argv.slice(2, process.argv.length);
+// const [name, github] = profileDataArgs;
 const questions = [
     {
         message: "What is the title of your project?",
@@ -98,7 +101,7 @@ const promptUserForReadMeInfo = () => {
             validate: descriptionInput => {
                 if (descriptionInput) {
                     return true;
-                }else {
+                } else {
                     console.log('Please enter a description!');
                     return false;
                 }
@@ -111,7 +114,7 @@ const promptUserForReadMeInfo = () => {
             validate: tOCInput => {
                 if (tOCInput) {
                     return true;
-                }else {
+                } else {
                     console.log('Please enter your table of contents chapters!');
                     return false;
                 }
@@ -124,7 +127,7 @@ const promptUserForReadMeInfo = () => {
             validate: installationInput => {
                 if (installationInput) {
                     return true;
-                }else {
+                } else {
                     console.log('Please enter installation instructions!');
                     return false;
                 }
@@ -137,7 +140,7 @@ const promptUserForReadMeInfo = () => {
             validate: useOfProjectInput => {
                 if (useOfProjectInput) {
                     return true;
-                }else {
+                } else {
                     console.log('Please enter how to use the project!');
                     return false;
                 }
@@ -150,7 +153,7 @@ const promptUserForReadMeInfo = () => {
             validate: licensesInput => {
                 if (licensesInput) {
                     return true;
-                }else {
+                } else {
                     console.log('Please enter any licenses. If none are needed, please say so!');
                     return false;
                 }
@@ -163,7 +166,7 @@ const promptUserForReadMeInfo = () => {
             validate: constributorsInput => {
                 if (constributorsInput) {
                     return true;
-                }else {
+                } else {
                     console.log('Please add any contributors, if none specify!');
                     return false;
                 }
@@ -176,7 +179,7 @@ const promptUserForReadMeInfo = () => {
             validate: testingInput => {
                 if (testingInput) {
                     return true;
-                }else {
+                } else {
                     console.log('Please enter how to test this project! (Required)');
                     return false;
                 }
@@ -189,14 +192,14 @@ const promptUserForReadMeInfo = () => {
             validate: githubRepoInput => {
                 if (githubRepoInput) {
                     return true;
-                }else {
+                } else {
                     console.log('Please enter a URL to the github repo!');
                     return false;
                 }
             }
         },
     ])
-    .then(writeToFile(generateMarkdown)) //trying to take the responses and put them in a readme but this looks suspicious
+    .then((data) => writeToFile(data)) //trying to take the responses and put them in a readme but this looks suspicious
 }
 
 const printProfileData = profileDataArr => {
@@ -216,10 +219,12 @@ const printProfileData = profileDataArr => {
 };
 
 //this is code that came with the starter code
-function writeToFile(fileName, data) {
-    fs.writeFileSync()
+function writeToFile(data) {
+    var printToStrng = printProfileData(data);
+    fs.writeFileSync(path.join(process.cwd(), "README.md"), printToStrng);
+//    
 }
-printProfileData(profileDataArgs);
+
 
 // TODO: Create a function to initialize app
 
