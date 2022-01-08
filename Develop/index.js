@@ -18,6 +18,7 @@
 
 
 // TODO: Include packages needed for this application
+const inquirer = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown.js');
 
 // TODO: Create an array of questions for user input
@@ -29,24 +30,20 @@ const questions = [
         name: "title"
     },
     {
-        message: "Who made this project?",
-        name: "creator"
-    },
-    {
         message: "What is the description of the project?",
         name: "description"
     },
     {
-        message: "What is the point of this project?",
-        name: "useForProject"
-    },
-    {
-        message: "How did you make this project?",
-        name: "creationOfProject"
+        message: "What do you want in your Table of Contents",
+        name: "tableOfContents"
     },
     {
         message: "How do I install this project?",
         name: "installation"
+    },
+    {
+        message: "How do you use this project?",
+        name: "useOfProject"
     },
     {
         message: "What licenses do I need to use this project?",
@@ -57,33 +54,147 @@ const questions = [
         name: "constributors"
     },
     {
-        message: "What challenges did you face?",
-        name: "challenges"
+        message: "How can I test this project?",
+        name: "testing"
     },
     {
-        message: "What makes this project unique?",
+        message: "What if the use has questions?",
         name: "special"
     },
 ];
 
 
 // TODO: Create a function to write README file
-const generateREADME = (username, githubName) => {
-    return `
-    Name: ${username}
-    Github: ${githubName}
-    `;
-};
-console.log(name, github);
-console.log(generateREADME(name, github));
+const promptUserForReadMeInfo = () => {
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'title',
+            message: 'What is the title of your project? (Required)',
+            validate: titleInput => {
+                if (titleInput) {
+                    return true;
+                }else {
+                    console.log('Please enter a title!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'description',
+            message: 'Please provide a description og your project. (Required)',
+            validate: descriptionInput => {
+                if (descriptionInput) {
+                    return true;
+                }else {
+                    console.log('Please enter a description!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'tOC',
+            message: 'Please list out your Table of Contents (Required)',
+            validate: tOCInput => {
+                if (tOCInput) {
+                    return true;
+                }else {
+                    console.log('Please enter your table of contents chapters!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'installation',
+            message: 'How would someone install your project? (Required)',
+            validate: installationInput => {
+                if (installationInput) {
+                    return true;
+                }else {
+                    console.log('Please enter installation instructions!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'useOfProject',
+            message: 'How do you use this project? (Required)',
+            validate: useOfProjectInput => {
+                if (useOfProjectInput) {
+                    return true;
+                }else {
+                    console.log('Please enter how to use the project!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'licenses',
+            message: 'What licenses are needed to use this project? (Required)',
+            validate: licensesInput => {
+                if (licensesInput) {
+                    return true;
+                }else {
+                    console.log('Please enter any licenses. If none are needed, please say so!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'constributors',
+            message: 'Did anyone contribute to this project? (Required)',
+            validate: constributorsInput => {
+                if (constributorsInput) {
+                    return true;
+                }else {
+                    console.log('Please add any contributors, if none specify!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'testing',
+            message: 'How do we test this project? (Required)',
+            validate: titleInput => {
+                if (titleInput) {
+                    return true;
+                }else {
+                    console.log('Please enter how to test this project! (Required)');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'githubRepo',
+            message: 'What is the github link? (Required)',
+            validate: githubRepoInput => {
+                if (githubRepoInput) {
+                    return true;
+                }else {
+                    console.log('Please enter a URL to the github repo!');
+                    return false;
+                }
+            }
+        },
+    ])
+}
 
-
-
-function writeToFile(fileName, data) {}
 const printProfileData = profileDataArr => {
-    profileDataArr.forEach(profileItem => console.log(profileItem));
+    //profileDataArr.forEach(profileItem => console.log(profileItem));
     console.log("=========");
 };
+
+//this is code that came with the starter code
+function writeToFile(fileName, data) {}
+
 printProfileData(profileDataArgs);
 
 // TODO: Create a function to initialize app
@@ -91,3 +202,7 @@ function init() {}
 
 // Function call to initialize app
 init();
+
+
+promptUserForReadMeInfo()
+.then(printProfileData)
