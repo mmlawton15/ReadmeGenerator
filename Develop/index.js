@@ -75,128 +75,7 @@ const questions = [
 
 
 // TODO: Create a function to write README file
-const promptUserForReadMeInfo = (title, description, tOC, installation, useOfProject, licenses, contributors, testing, githubRepo) => {
-    return inquirer.prompt([
-        {
-            type: 'input',
-            name: 'title',
-            message: 'What is the title of your project? (Required)',
-            validate: titleInput => {
-                if (titleInput) {
-                    titleInput = title;
-                    return true;
-                }else {
-                    console.log('Please enter a title!');
-                    return false;
-                }
-            },
-        },
-        {
-            type: 'input',
-            name: 'description',
-            message: 'Please provide a description og your project. (Required)',
-            validate: descriptionInput => {
-                if (descriptionInput) {
-                    return true;
-                }else {
-                    console.log('Please enter a description!');
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'input',
-            name: 'tOC',
-            message: 'Please list out your Table of Contents (Required)',
-            validate: tOCInput => {
-                if (tOCInput) {
-                    return true;
-                }else {
-                    console.log('Please enter your table of contents chapters!');
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'input',
-            name: 'installation',
-            message: 'How would someone install your project? (Required)',
-            validate: installationInput => {
-                if (installationInput) {
-                    return true;
-                }else {
-                    console.log('Please enter installation instructions!');
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'input',
-            name: 'useOfProject',
-            message: 'How do you use this project? (Required)',
-            validate: useOfProjectInput => {
-                if (useOfProjectInput) {
-                    return true;
-                }else {
-                    console.log('Please enter how to use the project!');
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'input',
-            name: 'licenses',
-            message: 'What licenses are needed to use this project? (Required)',
-            validate: licensesInput => {
-                if (licensesInput) {
-                    return true;
-                }else {
-                    console.log('Please enter any licenses. If none are needed, please say so!');
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'input',
-            name: 'constributors',
-            message: 'Did anyone contribute to this project? (Required)',
-            validate: constributorsInput => {
-                if (constributorsInput) {
-                    return true;
-                }else {
-                    console.log('Please add any contributors, if none specify!');
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'input',
-            name: 'testing',
-            message: 'How do we test this project? (Required)',
-            validate: testingInput => {
-                if (testingInput) {
-                    return true;
-                }else {
-                    console.log('Please enter how to test this project! (Required)');
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'input',
-            name: 'githubRepo',
-            message: 'What is the github link? (Required)',
-            validate: githubRepoInput => {
-                if (githubRepoInput) {
-                    return true;
-                }else {
-                    console.log('Please enter a URL to the github repo!');
-                    return false;
-                }
-            }
-        },
-    ])
-}
+
 
 const printProfileData = profileDataArr => {
     //profileDataArr.forEach(profileItem => console.log(profileItem));
@@ -215,15 +94,147 @@ const printProfileData = profileDataArr => {
 };
 
 //this is code that came with the starter code
-function writeToFile(fileName, data) {}
+function writeToFile() {
+    fs.writeFileSync()
+}
 printProfileData(profileDataArgs);
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'title',
+            message: 'What is the title of your project? (Required)',
+            validate: titleInput => {
+                if (titleInput) {
+                    titleInput = title;
+                    return true;
+                } else {
+                    console.log('Please enter a title!');
+                    return false;
+                }
+            },
+        },
+        {
+            type: 'input',
+            name: 'description',
+            message: 'Please provide a description og your project. (Required)',
+            validate: descriptionInput => {
+                if (descriptionInput) {
+                    descriptionInput = description;
+                    return true;
+                }else {
+                    console.log('Please enter a description!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'tOC',
+            message: 'Please list out your Table of Contents (Required)',
+            validate: tOCInput => {
+                if (tOCInput) {
+                    tOCInput = tOC;
+                    return true;
+                }else {
+                    console.log('Please enter your table of contents chapters!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'installation',
+            message: 'How would someone install your project? (Required)',
+            validate: installationInput => {
+                if (installationInput) {
+                    installationInput = installation;
+                    return true;
+                }else {
+                    console.log('Please enter installation instructions!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'useOfProject',
+            message: 'How do you use this project? (Required)',
+            validate: useOfProjectInput => {
+                if (useOfProjectInput) {
+                    useOfProjectInput = useOfProject;
+                    return true;
+                }else {
+                    console.log('Please enter how to use the project!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'licenses',
+            message: 'What licenses are needed to use this project? (Required)',
+            validate: licensesInput => {
+                if (licensesInput) {
+                    licensesInput = licenses;
+                    return true;
+                }else {
+                    console.log('Please enter any licenses. If none are needed, please say so!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'constributors',
+            message: 'Did anyone contribute to this project? (Required)',
+            validate: constributorsInput => {
+                if (constributorsInput) {
+                    constributorsInput = contributors;
+                    return true;
+                }else {
+                    console.log('Please add any contributors, if none specify!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'testing',
+            message: 'How do we test this project? (Required)',
+            validate: testingInput => {
+                if (testingInput) {
+                    testingInput = testing;
+                    return true;
+                }else {
+                    console.log('Please enter how to test this project! (Required)');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'githubRepo',
+            message: 'What is the github link? (Required)',
+            validate: githubRepoInput => {
+                if (githubRepoInput) {
+                    githubRepoInput = githubRepo;
+                    return true;
+                }else {
+                    console.log('Please enter a URL to the github repo!');
+                    return false;
+                }
+            }
+        },
+    ])
+    .then(writeToFile(generateMarkdown(printProfileData)));
+}
 
 // Function call to initialize app
 init();
 
 
 promptUserForReadMeInfo()
-.then(printProfileData)
+.then(printProfileData())
