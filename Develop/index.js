@@ -15,7 +15,7 @@
 // DONE - THEN I am taken to the corresponding section of the README
 // RECORD A VIDEO OF THIS APPS FUNCTIONALITY AND ADD SCREENSHOTS
 
-// TODO: Include packages needed for this application
+// PACKAGES NEEDED FOR THIS TO WORK
 const inquirer = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown.js'); //i think my badges will show up after i call this. error licenses is not defined shows up
 const fs = require("fs");
@@ -32,7 +32,7 @@ var githubRepo;
 var email;
 
 
-// TODO: Create a function to write README file
+// FUNCTION TO WRITE README
 const promptUserForReadMeInfo = () => {
     return inquirer.prompt([
         {
@@ -108,7 +108,7 @@ const promptUserForReadMeInfo = () => {
         },
         {
             type: 'input',
-            name: 'constributors',
+            name: 'contributors',
             message: 'Did anyone contribute to this project? (Required)',
             validate: contributorsInput => {
                 if (contributorsInput) {
@@ -176,21 +176,21 @@ const printProfileData = profileDataArr => {
 1. [Project Description](#project-description)
 2. [Installation Instructions](#installation-instructions)
 3. [Project Use](#project-use)
-4. [Necessary Licenses](#necessary-licenses)
+4. [Licenses](#licenses)
 5. [Contributors](#contributors)
 6. [Testing](#testing)
-7. [Questions](Questions)
-## Project Description 
+7. [Questions](#questions)
+## Project Description
 - ${description}
-## Installation Instructions 
+## Installation Instructions
 -  ${installation}
-## How to Use Project 
+## Project Use
 - ${useOfProject}
-## Licenses Needed 
+## Licenses
 - ${licenses}
-## Contributions 
+## Contributors
 - ${contributors}
-## Testing 
+## Testing
  - ${testing}
 ## Questions
  - If you have questions, please check out [MM's Github](www.github.com/${githubRepo}), or reach out to me at ${email}.
