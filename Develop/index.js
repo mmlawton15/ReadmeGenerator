@@ -22,7 +22,6 @@ const generateMarkdown = require('./utils/generateMarkdown.js');
 const fs = require("fs");
 const path = require("path")
 
-
 var title;
 var description;
 var tOC;
@@ -32,6 +31,8 @@ var licenses;
 var contributors;
 var testing;
 var githubRepo;
+
+
 
 // TODO: Create an array of questions for user input
 const questions = [
@@ -108,7 +109,7 @@ const promptUserForReadMeInfo = () => {
         {
             type: 'input',
             name: 'tOC',
-            message: 'Please list out your Table of Contents, each step separated by a comma starting from step 1 (Required).',
+            message: 'Please list out your Table of Contents, each step separated by a comma starting from the first step (Required).',
             validate: tOCInput => {
                 if (tOCInput) {
                     //var tOCArray = tOCInput.split(", ", <br></br>);
@@ -152,7 +153,7 @@ const promptUserForReadMeInfo = () => {
             type: 'checkbox',
             name: 'licenses',
             message: 'What licenses are needed to use this project? Check all that apply (Required)',
-            choices: ['None', 'Apache', 'Boost', 'ISC', 'BSD', 'Mozilla', 'Creative Commons', 'IBM', 'Eclipse', 'GNU', 'Open Data Commons', 'The Organization for Ethical Source'],
+            choices: ['None', 'Apache', 'Boost', 'ISC', 'BSD', 'Mozilla'],
             validate: licensesChosen => {
                 if (licensesChosen) {
                     licenses = licensesChosen;
@@ -210,9 +211,11 @@ const promptUserForReadMeInfo = () => {
     
 }
 
+//trying to send the licenses chosen to generateMarkdown.js
+export { licenses }
 
+//MARKDOWN SECTION
 const printProfileData = profileDataArr => {
-    //profileDataArr.forEach(profileItem => console.log(profileItem));
     console.log("=========");
     return `
 # ${title}
@@ -235,17 +238,12 @@ const printProfileData = profileDataArr => {
 `
 };
 
-//this is code that came with the starter code
+//WRITE THE README FILE
 function writeToFile(data) {
     var printToStrng = printProfileData(data);
-    fs.writeFileSync(path.join(process.cwd(), "README.md"), printToStrng);
-//    
+    fs.writeFileSync(path.join(process.cwd(), "README.md"), printToStrng);   
 }
 
-
-// TODO: Create a function to initialize app
-
-// Function call to initialize app
-
+//CALL TO README FUNCTIONS
 promptUserForReadMeInfo()
 .then(printProfileData())
