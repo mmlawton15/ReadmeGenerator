@@ -8,9 +8,9 @@
 // DONE - WHEN I choose a license for my application from a list of options
 // THEN a badge for that license is added near the top of the README and a notice is added to the section of the README entitled License that explains which license the application is covered under
 // DONE - WHEN I enter my GitHub username
-// THEN this is added to the section of the README entitled Questions, with a link to my GitHub profile
-// WHEN I enter my email address
-// THEN this is added to the section of the README entitled Questions, with instructions on how to reach me with additional questions
+// DONE - THEN this is added to the section of the README entitled Questions, with a link to my GitHub profile
+// DONE - WHEN I enter my email address
+// DONE - THEN this is added to the section of the README entitled Questions, with instructions on how to reach me with additional questions
 // WHEN I click on the links in the Table of Contents
 // THEN I am taken to the corresponding section of the README
 // RECORD A VIDEO OF THIS APPS FUNCTIONALITY AND ADD SCREENSHOTS
@@ -31,6 +31,8 @@ var licenses;
 var contributors;
 var testing;
 var githubRepo;
+var email;
+
 
 // TODO: Create a function to write README file
 const promptUserForReadMeInfo = () => {
@@ -152,13 +154,27 @@ const promptUserForReadMeInfo = () => {
         {
             type: 'input',
             name: 'githubLink',
-            message: 'What is the link to my github? (Required)',
+            message: 'What is the GitHub username? (Required)',
             validate: githubRepoInput => {
                 if (githubRepoInput) {
                     githubRepo = githubRepoInput
                     return true;
                 } else {
-                    console.log('Please enter a URL to the github repo!');
+                    console.log('Please enter the Github username!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'emailInput',
+            message: 'What the best email for people to reach you? (Required)',
+            validate: emailInput => {
+                if (emailInput) {
+                    email = emailInput;
+                    return true;
+                } else {
+                    console.log('Please enter the Github username!');
                     return false;
                 }
             }
@@ -188,7 +204,7 @@ const printProfileData = profileDataArr => {
 ## Testing 
  - ${testing}
 ## Questions
-[title] (${githubRepo})
+You can reach me at [MM's Github](www.github.com/${githubRepo}), or at ${email}.
 `
 };
 
