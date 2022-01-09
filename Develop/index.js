@@ -11,10 +11,9 @@
 // DONE - THEN this is added to the section of the README entitled Questions, with a link to my GitHub profile
 // DONE - WHEN I enter my email address
 // DONE - THEN this is added to the section of the README entitled Questions, with instructions on how to reach me with additional questions
-// WHEN I click on the links in the Table of Contents
-// THEN I am taken to the corresponding section of the README
+// DONE - WHEN I click on the links in the Table of Contents
+// DONE - THEN I am taken to the corresponding section of the README
 // RECORD A VIDEO OF THIS APPS FUNCTIONALITY AND ADD SCREENSHOTS
-
 
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
@@ -24,7 +23,6 @@ const path = require("path")
 
 var title;
 var description;
-var tOC;
 var installation;
 var useOfProject;
 var licenses;
@@ -61,21 +59,6 @@ const promptUserForReadMeInfo = () => {
                     return true;
                 } else {
                     console.log('Please enter a description!');
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'input',
-            name: 'tOC',
-            message: 'Please list out your Table of Contents, each step separated by a comma starting from the first step (Required).',
-            validate: tOCInput => {
-                if (tOCInput) {
-                    //var tOCArray = tOCInput.split(", ", <br></br>);
-                    tOC = tOCInput;
-                    return true;
-                } else {
-                    console.log('Please enter your table of contents chapters!');
                     return false;
                 }
             }
@@ -190,11 +173,17 @@ const printProfileData = profileDataArr => {
     return `
 # ${title}
 ## Table of Contents 
-1. ${tOC}
+1. [Project Description](#project-description)
+2. [Installation Instructions](#installation-instructions)
+3. [Project Use](#project-use)
+4. [Necessary Licenses](#necessary-licenses)
+5. [Contributors](#contributors)
+6. [Testing](#testing)
+7. [Questions](Questions)
 ## Project Description 
 - ${description}
 ## Installation Instructions 
-1. ${installation}
+-  ${installation}
 ## How to Use Project 
 - ${useOfProject}
 ## Licenses Needed 
@@ -204,7 +193,7 @@ const printProfileData = profileDataArr => {
 ## Testing 
  - ${testing}
 ## Questions
-You can reach me at [MM's Github](www.github.com/${githubRepo}), or at ${email}.
+ - If you have questions, please check out [MM's Github](www.github.com/${githubRepo}), or reach out to me at ${email}.
 `
 };
 
