@@ -1,11 +1,11 @@
 // DONE - GIVEN a command-line application that accepts user input
 // DONE - WHEN I am prompted for information about my application repository
-// Done - THEN a high-quality, professional README.md is generated with the title of my project and sections entitled Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions
+// DONE - THEN a high-quality, professional README.md is generated with the title of my project and sections entitled Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions
 // DONE - WHEN I enter my project title
 // DONE - THEN this is displayed as the title of the README
 // DONE - WHEN I enter a description, installation instructions, usage information, contribution guidelines, and test instructions
-//  - THEN this information is added to the sections of the README entitled Description, Installation, Usage, Contributing, and Tests
-// WHEN I choose a license for my application from a list of options
+// DONE - THEN this information is added to the sections of the README entitled Description, Installation, Usage, Contributing, and Tests
+// DONE - WHEN I choose a license for my application from a list of options
 // THEN a badge for that license is added near the top of the README and a notice is added to the section of the README entitled License that explains which license the application is covered under
 // WHEN I enter my GitHub username
 // THEN this is added to the section of the README entitled Questions, with a link to my GitHub profile
@@ -108,10 +108,10 @@ const promptUserForReadMeInfo = () => {
         {
             type: 'input',
             name: 'tOC',
-            message: 'Please list out your Table of Contents, each step separated by a comma strating from step 1 (Required).',
+            message: 'Please list out your Table of Contents, each step separated by a comma starting from step 1 (Required).',
             validate: tOCInput => {
                 if (tOCInput) {
-                    //var tOCArray = tOCInput.split(", ");
+                    //var tOCArray = tOCInput.split(", ", <br></br>);
                     tOC = tOCInput;
                     return true;
                 } else {
@@ -152,7 +152,16 @@ const promptUserForReadMeInfo = () => {
             type: 'checkbox',
             name: 'licenses',
             message: 'What licenses are needed to use this project? Check all that apply (Required)',
-            choices: ['None', 'MIT', 'Apache','Perl', 'Boost', 'ISC', 'BSD', 'Mozilla', 'Creative Commons', 'IBM', 'Eclipse', 'GNU', 'Open Data Commons', 'The Organization for Ethical Source', ]
+            choices: ['None', 'Apache', 'Boost', 'ISC', 'BSD', 'Mozilla', 'Creative Commons', 'IBM', 'Eclipse', 'GNU', 'Open Data Commons', 'The Organization for Ethical Source'],
+            validate: licensesChosen => {
+                if (licensesChosen) {
+                    licenses = licensesChosen;
+                    return true;
+                } else {
+                    licenses = licensesChosen;
+                    return true;
+                }
+            }
         },
         {
             type: 'input',
@@ -198,7 +207,9 @@ const promptUserForReadMeInfo = () => {
         },
     ])
     .then((data) => writeToFile(data))
+    
 }
+
 
 const printProfileData = profileDataArr => {
     //profileDataArr.forEach(profileItem => console.log(profileItem));
@@ -214,7 +225,7 @@ const printProfileData = profileDataArr => {
 ## How to Use Project 
 - ${useOfProject}
 ## Licenses Needed 
-- ${licenses.map(license => license).join(', ')}
+- ${licenses}
 ## Contributions 
 - ${contributors}
 ## Testing 
