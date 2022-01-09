@@ -7,7 +7,7 @@
 // DONE - THEN this information is added to the sections of the README entitled Description, Installation, Usage, Contributing, and Tests
 // DONE - WHEN I choose a license for my application from a list of options
 // THEN a badge for that license is added near the top of the README and a notice is added to the section of the README entitled License that explains which license the application is covered under
-// WHEN I enter my GitHub username
+// DONE - WHEN I enter my GitHub username
 // THEN this is added to the section of the README entitled Questions, with a link to my GitHub profile
 // WHEN I enter my email address
 // THEN this is added to the section of the README entitled Questions, with instructions on how to reach me with additional questions
@@ -18,7 +18,7 @@
 
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
-const generateMarkdown = require('./utils/generateMarkdown.js');
+const generateMarkdown = require('./utils/generateMarkdown.js'); //i think my badges will show up after i call this. error licenses is not defined shows up
 const fs = require("fs");
 const path = require("path")
 
@@ -31,49 +31,6 @@ var licenses;
 var contributors;
 var testing;
 var githubRepo;
-
-
-
-// TODO: Create an array of questions for user input
-const questions = [
-    {
-        message: "What is the title of your project?",
-        name: "title"
-    },
-    {
-        message: "What is the description of the project?",
-        name: "description"
-    },
-    {
-        message: "What do you want in your Table of Contents",
-        name: "tableOfContents"
-    },
-    {
-        message: "How do I install this project?",
-        name: "installation"
-    },
-    {
-        message: "How do you use this project?",
-        name: "useOfProject"
-    },
-    {
-        message: "What licenses do I need to use this project?",
-        name: "licenses"
-    },
-    {
-        message: "Did anyone contribute to this project?",
-        name: "constributors"
-    },
-    {
-        message: "How can I test this project?",
-        name: "testing"
-    },
-    {
-        message: "What if the use has questions?",
-        name: "special"
-    },
-];
-
 
 // TODO: Create a function to write README file
 const promptUserForReadMeInfo = () => {
@@ -153,7 +110,7 @@ const promptUserForReadMeInfo = () => {
             type: 'checkbox',
             name: 'licenses',
             message: 'What licenses are needed to use this project? Check all that apply (Required)',
-            choices: ['None', 'Apache', 'Boost', 'ISC', 'BSD', 'Mozilla'],
+            choices: ['None', 'Apache', 'MIT','Mozilla'],
             validate: licensesChosen => {
                 if (licensesChosen) {
                     licenses = licensesChosen;
@@ -194,8 +151,8 @@ const promptUserForReadMeInfo = () => {
         },
         {
             type: 'input',
-            name: 'githubRepo',
-            message: 'What is the github link? (Required)',
+            name: 'githubLink',
+            message: 'What is the link to my github? (Required)',
             validate: githubRepoInput => {
                 if (githubRepoInput) {
                     githubRepo = githubRepoInput
@@ -210,9 +167,6 @@ const promptUserForReadMeInfo = () => {
     .then((data) => writeToFile(data))
     
 }
-
-//trying to send the licenses chosen to generateMarkdown.js
-export { licenses }
 
 //MARKDOWN SECTION
 const printProfileData = profileDataArr => {
@@ -233,7 +187,7 @@ const printProfileData = profileDataArr => {
 - ${contributors}
 ## Testing 
  - ${testing}
-## GitHub Repo Link 
+## Questions
 [title] (${githubRepo})
 `
 };
