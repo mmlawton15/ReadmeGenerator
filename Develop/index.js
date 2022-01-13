@@ -17,20 +17,8 @@
 
 // PACKAGES NEEDED FOR THIS TO WORK
 const inquirer = require('inquirer');
-const generateMarkdown = require('./utils/generateMarkdown.js'); //i think my badges will show up after i call this. error licenses is not defined shows up
 const fs = require("fs");
 const path = require("path")
-
-var title;
-var description;
-var installation;
-var useOfProject;
-var licenses;
-var contributors;
-var testing;
-var githubRepo;
-var email;
-
 
 // FUNCTION TO WRITE README
 const promptUserForReadMeInfo = () => {
@@ -41,7 +29,6 @@ const promptUserForReadMeInfo = () => {
             message: 'What is the title of your project? (Required)',
             validate: titleInput => {
                 if (titleInput) {
-                    title = titleInput;
                     return true;
                 }else {
                     console.log('Please enter a title!');
@@ -55,7 +42,6 @@ const promptUserForReadMeInfo = () => {
             message: 'Please provide a description for your project. (Required)',
             validate: descriptionInput => {
                 if (descriptionInput) {
-                    description = descriptionInput;
                     return true;
                 } else {
                     console.log('Please enter a description!');
@@ -69,7 +55,6 @@ const promptUserForReadMeInfo = () => {
             message: 'How would someone install your project? (Required)',
             validate: installationInput => {
                 if (installationInput) {
-                    installation = installationInput;
                     return true;
                 } else {
                     console.log('Please enter installation instructions!');
@@ -83,7 +68,6 @@ const promptUserForReadMeInfo = () => {
             message: 'How do you use this project? (Required)',
             validate: useOfProjectInput => {
                 if (useOfProjectInput) {
-                    useOfProject = useOfProjectInput;
                     return true;
                 } else {
                     console.log('Please enter how to use the project!');
@@ -92,19 +76,10 @@ const promptUserForReadMeInfo = () => {
             }
         },
         {
-            type: 'checkbox',
+            type: 'list',
             name: 'licenses',
             message: 'What licenses are needed to use this project? Check all that apply (Required)',
             choices: ['None', 'Apache', 'MIT','Mozilla'],
-            validate: licensesChosen => {
-                if (licensesChosen) {
-                    licenses = licensesChosen;
-                    return true;
-                } else {
-                    licenses = licensesChosen;
-                    return true;
-                }
-            }
         },
         {
             type: 'input',
@@ -112,7 +87,6 @@ const promptUserForReadMeInfo = () => {
             message: 'Did anyone contribute to this project? (Required)',
             validate: contributorsInput => {
                 if (contributorsInput) {
-                    contributors = contributorsInput;
                     return true;
                 } else {
                     console.log('Please add any contributors, if none specify!');
@@ -126,7 +100,6 @@ const promptUserForReadMeInfo = () => {
             message: 'How do we test this project? (Required)',
             validate: testingInput => {
                 if (testingInput) {
-                    testing = testingInput;
                     return true;
                 } else {
                     console.log('Please enter how to test this project! (Required)');
@@ -140,7 +113,6 @@ const promptUserForReadMeInfo = () => {
             message: 'What is the GitHub username? (Required)',
             validate: githubRepoInput => {
                 if (githubRepoInput) {
-                    githubRepo = githubRepoInput
                     return true;
                 } else {
                     console.log('Please enter the Github username!');
@@ -154,7 +126,6 @@ const promptUserForReadMeInfo = () => {
             message: 'What the best email for people to reach you? (Required)',
             validate: emailInput => {
                 if (emailInput) {
-                    email = emailInput;
                     return true;
                 } else {
                     console.log('Please enter the Github username!');
@@ -163,15 +134,27 @@ const promptUserForReadMeInfo = () => {
             }
         },
     ])
-    .then((data) => writeToFile(data))
+    .then((answers) => {
+        writeToFile(answers)
+    })
     
 }
+
+function renderLicenseBadge(licenseType) {
+    if (licenseType === 'Apache') {
+      return `[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)`
+    } else if (licenseType === 'MIT') {
+      return `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`
+    } else if (licenseType === 'Mozilla') {
+      return `[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)`
+    }
+  };
 
 //MARKDOWN SECTION
 const printProfileData = profileDataArr => {
     console.log("=========");
     return `
-# ${title}
+# ${profileDataArr.title}
 ## Table of Contents 
 1. [Project Description](#project-description)
 2. [Installation Instructions](#installation-instructions)
@@ -181,28 +164,27 @@ const printProfileData = profileDataArr => {
 6. [Testing](#testing)
 7. [Questions](#questions)
 ## Project Description
-- ${description}
+- ${profileDataArr.description}
 ## Installation Instructions
--  ${installation}
+-  ${profileDataArr.installation}
 ## Project Use
-- ${useOfProject}
+- ${profileDataArr.useOfProject}
 ## Licenses
-- ${licenses}
+- ${profileDataArr.licenses} ${renderLicenseBadge(profileDataArr.licenses)}
 ## Contributors
-- ${contributors}
+- ${profileDataArr.contributors}
 ## Testing
- - ${testing}
+ - ${profileDataArr.testing}
 ## Questions
- - If you have questions, please check out [MM's Github](www.github.com/${githubRepo}), or reach out to me at ${email}.
+ - If you have questions, please check out [MM's Github](www.github.com/${profileDataArr.githubRepo}), or reach out to me at ${profileDataArr.email}.
 `
 };
 
 //WRITE THE README FILE
-function writeToFile(data) {
-    var printToStrng = printProfileData(data);
+function writeToFile(dataFromInq) {
+    var printToStrng = printProfileData(dataFromInq);
     fs.writeFileSync(path.join(process.cwd(), "README.md"), printToStrng);   
 }
 
 //CALL TO README FUNCTIONS
 promptUserForReadMeInfo()
-.then(printProfileData())
