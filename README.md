@@ -4,6 +4,12 @@
 ## What is this project?
 This project is a readme generator for developers to use. They answer a few command-line prompts, and at the end have a professional readme generated for them! The beauty of this is that if you're in a time crunch or don't want to manually build one, this tool can do the leg work.
 
+## Stack?
+Backend:
+- Javascript
+- Node
+- Markdown for creating README file
+
 ## How did I build it?
 I built this project using Javascript, Inquirer and Node.js. This is how I prompt the user for information and build out the Readme file.
 
